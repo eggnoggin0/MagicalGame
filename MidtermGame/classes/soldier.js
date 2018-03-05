@@ -210,8 +210,6 @@ class Soldier {
       imageMode(CENTER)
       image(this.currentImage, this.xPos, this.yPos, this.sizeX,this.sizeY);
 
-      ellipse(this.xPos, this.yPos, this.sizeX, this.sizeY);
-
     }
   }
 }

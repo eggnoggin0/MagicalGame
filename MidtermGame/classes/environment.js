@@ -208,6 +208,7 @@ class Environment {
       }
 
     }
+    
     else if (this.character.changeTimeMeter > 90) {
       background(255);
       this.character.changeTime();
