@@ -28,32 +28,16 @@ class Fire {
 
     move() {
 
-        /*push();
+      fill(255*random(0.5,1),0,0);
+      ellipse(this.xPos,this.yPos,this.size,this.size);
+      //ellipse(-20,0,20,20);
 
-    noStroke();
+      //this.angle += this.angleSpeed;
+      this.xPos += this.xSpeed;
+      this.yPos += this.ySpeed;
 
-    translate(this.xPos, this.yPos);
-    rotate(radians(this.angle));
-    fill(255*random(0.5,1),0,0);
-    ellipse(20,0,20,20);
-    ellipse(-20,0,20,20);
+      this.surviveTime -= 1;
 
-    pop();*/
-
-        fill(255*random(0.5,1),0,0);
-        ellipse(this.xPos,this.yPos,this.size,this.size);
-        //ellipse(-20,0,20,20);
-
-        //this.angle += this.angleSpeed;
-        this.xPos += this.xSpeed;
-        this.yPos += this.ySpeed;
-
-        this.surviveTime -= 1;
-
-        /*if(this.direction == 'N') { this.yPos -= this.ySpeed; this.xPos += random(-1,1); }
-    if(this.direction == 'S') { this.yPos += this.ySpeed; this.xPos += random(-1,1); }
-    if(this.direction == 'E') { this.xPos += this.xSpeed; this.yPos += random(-1,1); }
-    if(this.direction == 'W') { this.xPos -= this.xSpeed; this.yPos += random(-1,1); }*/
 
     }
 

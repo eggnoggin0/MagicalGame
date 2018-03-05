@@ -167,11 +167,6 @@ class Environment {
 
         stroke(0);
 
-        /*for(var i = 0; i < randomRects.length; i++){
-      fill(86*rectColors[i][0],80*rectColors[i][1],60*rectColors[i][2]);
-      rect(randomRects[i][0],randomRects[i][1],randomRects[i][2],randomRects[i][3])
-    }*/
-
     }
 
     display() {
