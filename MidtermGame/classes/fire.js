@@ -1,57 +1,61 @@
 class Fire {
 
-    constructor(x,y,direction) {
+  constructor(x,y,direction) {
 
-        //Position
-        this.xPos = x;
-        this.yPos = y;
+    //Position
+    if(direction == 'W') { this.xPos = x - 100; }
+    if(direction == 'E') { this.xPos = x + 100; }
 
-        this.startX = x;
-        this.startY = y;
+    this.yPos = y;
 
-        this.direction = direction;
+    this.startX = x;
+    this.startY = y;
 
-        //Movement
-        this.xSpeed = random(-1,1);
-        this.ySpeed = random(-1,1);
-        this.angleSpeed = 5;
-        this.angle = random(0,2*PI);
+    this.direction = direction;
 
-        //size
-        this.size = 10;
+    //Movement
+    this.xSpeed = random(-1,1);
+    this.ySpeed = random(-1,1);
+    this.angleSpeed = 5;
+    this.angle = random(0,2*PI);
 
-        this.surviveTime = 100;
+    //size
+    this.size = 10;
+    this.surviveTime = 100;
+    this.inDisplay = true;
+    this.fireRadius = 100;
 
-        this.inDisplay = true;
+  }
 
+  move() {
+
+    fill(255*random(0.5,1),0,0);
+    ellipse(this.xPos,this.yPos,this.size,this.size);
+
+    this.xPos += this.xSpeed;
+    this.yPos += this.ySpeed;
+
+    this.surviveTime -= 1;
+
+  }
+
+  checkPosition() {
+    if(dist(this.xPos, this.yPos, this.startX, this.startY) > this.fireRadius || this.surviveTime == 0) {
+      this.inDisplay = false;
     }
+  }
 
-    move() {
+  checkHits(object) {
 
-      fill(255*random(0.5,1),0,0);
-      ellipse(this.xPos,this.yPos,this.size,this.size);
-      //ellipse(-20,0,20,20);
+    return (dist(object.xPos,object.yPos,this.xPos,this.yPos) < object.size);
 
-      //this.angle += this.angleSpeed;
-      this.xPos += this.xSpeed;
-      this.yPos += this.ySpeed;
+  }
 
-      this.surviveTime -= 1;
+  display() {
 
+    this.move();
+    this.checkPosition();
 
-    }
-
-    checkPosition() {
-        if(dist(this.xPos, this.yPos, this.startX, this.startY) > 50 || this.surviveTime == 0) {
-            this.inDisplay = false;
-        }
-    }
-
-    display() {
-
-        this.move();
-        this.checkPosition();
-
-    }
+  }
 
 }
