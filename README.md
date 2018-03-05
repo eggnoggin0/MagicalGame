@@ -1,0 +1,2 @@
+# MagicalGame
+game about magic
