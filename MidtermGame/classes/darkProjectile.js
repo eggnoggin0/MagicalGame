@@ -30,7 +30,7 @@ class DarkProjectile {
 
   setProjectile(x,y,direction) {
 
-    if(this.inDisplay == false) {
+    if(this.inDisplay == false && this.projectileTime == 0) {
 
       this.projectileTime = this.projectileTimeLimit;
 
@@ -49,9 +49,13 @@ class DarkProjectile {
       this.inDisplay = true;
 
     }
+    else if (this.projectileTime > 0) {
+      this.projectileTime--;
+    }
 
   }
 
+  //morph size for animation
   changeSize() {
 
     if(this.size < 50 && this.grow) { this.size++; }
@@ -61,6 +65,7 @@ class DarkProjectile {
 
   }
 
+  //move projectile
   move() {
 
     fill(0);
@@ -74,12 +79,14 @@ class DarkProjectile {
 
   }
 
+  //check if in display
   checkPosition() {
     if(this.xPos < 0 || this.xPos > width) {
       this.inDisplay = false;
     }
   }
 
+  //check if hit object
   checkHits(object) {
 
     if(this.inDisplay) {
@@ -91,6 +98,7 @@ class DarkProjectile {
 
   }
 
+  //display projectile
   display() {
 
     if(this.inDisplay) {

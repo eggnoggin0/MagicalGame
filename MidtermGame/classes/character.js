@@ -243,6 +243,7 @@ class Character {
 
   }
 
+  //show projectiles
   displayProjectiles() {
     for(var i = 0; i < this.projectiles.length; i++ ){
       this.projectiles[i].display();
@@ -252,10 +253,12 @@ class Character {
     }
   }
 
+  //full display
   display() {
 
     this.checkHealth();
 
+    //check if alive
     if(this.isAlive) {
       line(this.leftSide,this.topSide,this.rightSide,this.topSide)
       line(this.leftSide,this.bottomSide,this.rightSide,this.bottomSide)
@@ -280,7 +283,21 @@ class Character {
       fill(0);
       textAlign(CENTER);
       text('You died!', width / 2, height / 2);
+      text('Press ENTER to try again', width / 2, height / 2 + 40);
 
+      if(keyIsDown(13)) {
+        //Alive
+        this.isAlive = true;
+
+        //Position
+        this.xPos = width/2;
+        this.yPos = height/2;
+
+        this.magicMeter = this.magicLimit;
+
+        this.health = 100;
+
+      }
     }
 
 

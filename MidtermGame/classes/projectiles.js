@@ -9,8 +9,8 @@ class Projectiles {
     this.direction = direction;
 
     //Movement
-    this.xSpeed = 4;
-    this.ySpeed = 4;
+    this.xSpeed = 7;
+    this.ySpeed = 7;
 
     //size
     this.size = 5;
@@ -19,6 +19,7 @@ class Projectiles {
 
   }
 
+  //move projectile
   move() {
 
     if(this.direction == 'N') { this.yPos -= this.ySpeed; this.xPos += random(-1,1); }
@@ -28,21 +29,24 @@ class Projectiles {
 
   }
 
+  //check if on screen
   checkPosition() {
     if(this.xPos < 0 || this.xPos > width || this.yPos < 0 || this.yPos > height) {
       this.inDisplay = false;
     }
   }
 
+  //check if hits object
   checkHits(object) {
 
     if(this.xPos > object.leftSide &&
       this.xPos < object.rightSide &&
       this.yPos > object.topSide &&
       this.yPos < object.bottomSide) { return true; }
-      
+
   }
 
+  //display object
   display() {
 
     fill(random(0.5,1)*255,random(0.5,1)*255,0);

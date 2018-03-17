@@ -70,6 +70,11 @@ class Soldier {
       this.projectiles[i].inDisplay = false;
     }
 
+    this.leftSide   = this.xPos - (this.sizeX / 2);
+    this.rightSide  = this.xPos + (this.sizeX / 2);
+    this.topSide    = this.yPos - (this.sizeY / 2);
+    this.bottomSide = this.yPos + (this.sizeY / 2);
+
   }
 
   //movement
@@ -78,6 +83,7 @@ class Soldier {
   moveUp()    { this.yPos -= this.ySpeed; }
   moveDown()  { this.yPos += this.ySpeed; }
 
+  //create move sequence
   manuever() {
 
     switch(this.moveChoice) {
@@ -105,6 +111,7 @@ class Soldier {
 
   }
 
+  //move monster
   movePosition() {
 
     if(this.engagePlayer) {
@@ -122,18 +129,13 @@ class Soldier {
     this.topSide    = this.yPos - (this.sizeY / 2);
     this.bottomSide = this.yPos + (this.sizeY / 2);
 
-    line(this.leftSide,this.topSide,this.rightSide,this.topSide)
-    line(this.leftSide,this.bottomSide,this.rightSide,this.bottomSide)
-    line(this.leftSide,this.bottomSide,this.leftSide,this.topSide)
-    line(this.rightSide,this.bottomSide,this.rightSide,this.topSide)
-
   }
 
 
   //attacks
 
   fireProjectile() {
-
+    //base number of projectiles based on type of monster
     if(this.version == 'Normal') {
 
       if( this.yPos > this.character.topSide  && this.yPos < this.character.bottomSide ) {
@@ -158,7 +160,6 @@ class Soldier {
 
           this.projectiles[0].setProjectile(this.xPos,this.yPos,this.direction);
           this.projectiles[1].setProjectile(this.xPos,this.yPos,this.direction);
-
 
         }
         if( this.character.xPos > this.xPos && this.direction == 'E' ) {
@@ -192,6 +193,7 @@ class Soldier {
     }
   }
 
+  //display attacks
   displayAttacks() {
 
     for(var i = 0; i < this.projectiles.length; i++ ) {
@@ -200,9 +202,17 @@ class Soldier {
 
   }
 
+  //function if time is moving
   moveAndDisplay() {
 
     if(this.isAlive) {
+
+      //hitbox
+      line(this.leftSide,this.topSide,this.rightSide,this.topSide)
+      line(this.leftSide,this.bottomSide,this.rightSide,this.bottomSide)
+      line(this.leftSide,this.bottomSide,this.leftSide,this.topSide)
+      line(this.rightSide,this.bottomSide,this.rightSide,this.topSide)
+
 
       imageMode(CENTER);
 
@@ -218,9 +228,16 @@ class Soldier {
 
   }
 
+  //function if time is stopped
   stoppedAndDisplay() {
 
     if(this.isAlive) {
+
+      //hitbox
+      line(this.leftSide,this.topSide,this.rightSide,this.topSide)
+      line(this.leftSide,this.bottomSide,this.rightSide,this.bottomSide)
+      line(this.leftSide,this.bottomSide,this.leftSide,this.topSide)
+      line(this.rightSide,this.bottomSide,this.rightSide,this.topSide)
 
       imageMode(CENTER)
       image(this.currentImage, this.xPos, this.yPos, this.sizeX,this.sizeY);

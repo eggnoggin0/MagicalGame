@@ -8,6 +8,7 @@ class PauseScreen {
     this.pauseTime = 0;
   }
 
+  //check if paused
   checkPause() {
 
     if(this.pauseTime == 0) {
@@ -23,6 +24,7 @@ class PauseScreen {
 
   }
 
+  //display pause screen
   display() {
 
     this.environment.displayPresentEnvironment();

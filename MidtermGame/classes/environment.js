@@ -18,14 +18,15 @@ class Environment {
 
   }
 
-  reviveItems() {
+  /*reviveItems() {
 
     if(parseInt(random(0,2)) == 1) {
       this.item.exist = true;
     }
 
-  }
+  }*/
 
+  //check if hit enemy
   checkHits(enemyIndex) {
 
     //character hitting enemy
@@ -44,25 +45,30 @@ class Environment {
 
   }
 
+  //check if move screen
   checkPosition() {
 
     if(this.character.xPos > width) {
       offset += width;
       this.character.xPos = 0;
 
-      for(var i = 0; i < numEnemies; i++) {
+      //change enemies
+      for(var i = 0; i < this.enemies.length; i++) {
 
-        if(i < this.screenNum) { this.enemies[i].setSoldier(random(100,width),random(height/3 + 100,height-100),'Dark',true); }
-        else { this.enemies[i].setSoldier(random(100,width),random(height/3 + 100,height-100),'Strong',false); }
+        if(i < this.screenNum) {
+          if(i <= 3) { this.enemies[i].setSoldier(random(100,width),random(height/3 + 100,height-100),'Normal',true); }
+          else if(i > 3 && i <=6 ) { this.enemies[i].setSoldier(random(100,width),random(height/3 + 100,height-100),'Strong',true); }
+          else if( i > 6 ){ this.enemies[i].setSoldier(random(100,width),random(height/3 + 100,height-100),'Dark',false); }
+        }
 
       }
 
-      this.reviveItems();
       this.screenNum++;
 
     }
   }
 
+  //show environment in present
   displayPresentEnvironment() {
 
     background(173,216,230);
@@ -113,6 +119,7 @@ class Environment {
 
   }
 
+  //change environment to past
   displayPastEnvironment() {
 
     background(255,248,220);
@@ -163,6 +170,7 @@ class Environment {
 
   }
 
+  //display whole environment
   display() {
 
     if(this.character.inPresent) {

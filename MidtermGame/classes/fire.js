@@ -27,6 +27,7 @@ class Fire {
 
   }
 
+  //move fire
   move() {
 
     fill(255*random(0.5,1),0,0);
@@ -39,18 +40,26 @@ class Fire {
 
   }
 
+  //check if in fire radius
   checkPosition() {
     if(dist(this.xPos, this.yPos, this.startX, this.startY) > this.fireRadius || this.surviveTime == 0) {
       this.inDisplay = false;
     }
   }
 
+  //check if it hits object
   checkHits(object) {
 
-    return (dist(object.xPos,object.yPos,this.xPos,this.yPos) < object.size);
+    if(this.inDisplay) {
+      if(this.xPos + (this.size / 2) > object.leftSide &&
+        this.xPos - (this.size / 2) < object.rightSide &&
+        this.yPos + (this.size / 2) > object.topSide &&
+        this.yPos - (this.size / 2) < object.bottomSide) { this.inDisplay = false; return true; }
+    }
 
   }
 
+  //display
   display() {
 
     this.move();
