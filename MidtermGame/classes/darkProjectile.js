@@ -82,7 +82,12 @@ class DarkProjectile {
 
   checkHits(object) {
 
-    return (dist(object.xPos,object.yPos,this.xPos,this.yPos) < object.size);
+    if(this.inDisplay) {
+      if(this.xPos + (this.size / 2) > object.leftSide &&
+        this.xPos - (this.size / 2) < object.rightSide &&
+        this.yPos + (this.size / 2) > object.topSide &&
+        this.yPos - (this.size / 2) < object.bottomSide) { this.inDisplay = false; return true; }
+    }
 
   }
 

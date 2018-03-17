@@ -36,8 +36,11 @@ class Projectiles {
 
   checkHits(object) {
 
-    return (dist(object.xPos,object.yPos,this.xPos,this.yPos) < object.size);
-
+    if(this.xPos > object.leftSide &&
+      this.xPos < object.rightSide &&
+      this.yPos > object.topSide &&
+      this.yPos < object.bottomSide) { return true; }
+      
   }
 
   display() {

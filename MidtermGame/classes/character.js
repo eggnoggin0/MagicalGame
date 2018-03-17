@@ -1,8 +1,9 @@
 class Character {
 
-  //
+  //instantiate
   constructor(x,y) {
 
+    //object image
     this.imageLeft = monkeyLeft;
     this.imageRight = monkeyRight;
 
@@ -24,6 +25,11 @@ class Character {
     this.sizeX = this.currentImage.width * 0.2;
     this.sizeY = this.currentImage.height * 0.2;
 
+    this.leftSide   = this.xPos - (this.sizeX / 2);
+    this.rightSide  = this.xPos + (this.sizeX / 2);
+    this.topSide    = this.yPos - (this.sizeY / 2);
+    this.bottomSide = this.yPos + (this.sizeY / 2);
+
     //meters
     this.magicLimit = 250;
     this.magicMeter = this.magicLimit;
@@ -32,22 +38,27 @@ class Character {
 
     //weapons
 
+    //electricity
     this.projectiles = [];
 
+    //fire
     this.fireLimit = 100;
     this.fireTime = 0;
     this.fireArray = [];
 
+    //time
     this.timeIsStopped = false;
     this.stoppedTimeLimit = 1000;
     this.timeLimit = 0;
 
+    //teleportation
     this.teleportLength = 150;
     this.teleportLimit  = 100;
     this.teleportTime   = 0;
 
     this.teleportDirection = 'N';
 
+    //time change
     this.inPresent = true;
     this.changeTimeLimit = 100;
     this.changeTimeMeter = 0;
@@ -55,11 +66,14 @@ class Character {
   }
 
   //movement
+
+  //move direction
   moveLeft()  { this.teleportDirection = 'W'; this.direction = 'W'; this.xPos -= this.xSpeed; }
   moveRight() { this.teleportDirection = 'E'; this.direction = 'E'; this.xPos += this.xSpeed; }
   moveUp()    { this.teleportDirection = 'N'; this.yPos -= this.ySpeed; }
   moveDown()  { this.teleportDirection = 'S'; this.yPos += this.ySpeed; }
 
+  //change position
   movePosition() {
 
     if (this.yPos > height/3) {
@@ -74,12 +88,18 @@ class Character {
 
     if (keyIsDown(68)) { this.moveRight(); }
 
+    this.leftSide   = this.xPos - (this.sizeX / 2);
+    this.rightSide  = this.xPos + (this.sizeX / 2);
+    this.topSide    = this.yPos - (this.sizeY / 2);
+    this.bottomSide = this.yPos + (this.sizeY / 2);
+
   }
 
   //attacks
 
   createProjectiles() {
 
+    //electricity
     if(this.magicMeter > 0.1) {
       if(keyIsDown(78)) {
         var temp = new Projectiles(this.xPos,this.yPos,this.direction);
@@ -87,6 +107,8 @@ class Character {
         this.magicMeter -= 0.1;
       }
     }
+
+    //fire
     if(this.fireTime == 0) {
       if(this.magicMeter > 10) {
 
@@ -105,6 +127,7 @@ class Character {
     }
   }
 
+  //stop time
   stopTime() {
 
     if(this.timeIsStopped == false) {
@@ -117,6 +140,7 @@ class Character {
     }
 
   }
+
 
   checkTime() {
 
@@ -132,6 +156,7 @@ class Character {
     }
   }
 
+  //teleportation
   teleport() {
 
     if(this.magicMeter > 5) {
@@ -160,6 +185,7 @@ class Character {
     }
   }
 
+  //change time periods
   changeTime() {
     if(this.changeTimeMeter == 0) {
       if(keyIsDown(84)) {
@@ -177,6 +203,8 @@ class Character {
     }
 
   }
+
+  //attack function
   useAttacks() {
     this.createProjectiles();
     this.stopTime();
@@ -185,6 +213,18 @@ class Character {
     this.changeTime();
   }
 
+  //health
+  deductHealth() {
+    this.health -= 10;
+  }
+
+  checkHealth() {
+    if(this.health == 0) {
+      this.isAlive = false;
+    }
+  }
+
+  //display function
   displayMeters() {
 
     textAlign(LEFT);
@@ -214,16 +254,35 @@ class Character {
 
   display() {
 
-    if(this.direction == 'W') { this.currentImage = this.imageLeft; }
-    if(this.direction == 'E') { this.currentImage = this.imageRight; }
+    this.checkHealth();
 
-    imageMode(CENTER)
+    if(this.isAlive) {
+      line(this.leftSide,this.topSide,this.rightSide,this.topSide)
+      line(this.leftSide,this.bottomSide,this.rightSide,this.bottomSide)
+      line(this.leftSide,this.bottomSide,this.leftSide,this.topSide)
+      line(this.rightSide,this.bottomSide,this.rightSide,this.topSide)
 
-    image(this.currentImage,this.xPos, this.yPos, this.sizeX, this.sizeY);
-    this.displayMeters();
-    this.movePosition();
-    this.useAttacks();
-    this.displayProjectiles();
+      if(this.direction == 'W') { this.currentImage = this.imageLeft; }
+      if(this.direction == 'E') { this.currentImage = this.imageRight; }
+
+      imageMode(CENTER)
+
+      image(this.currentImage,this.xPos, this.yPos, this.sizeX, this.sizeY);
+      this.displayMeters();
+      this.movePosition();
+      this.useAttacks();
+      this.displayProjectiles();
+    }
+
+    else {
+
+      textSize(30);
+      fill(0);
+      textAlign(CENTER);
+      text('You died!', width / 2, height / 2);
+
+    }
+
 
   }
 }

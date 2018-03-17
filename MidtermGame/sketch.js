@@ -20,6 +20,7 @@ var darkBatRight;
 
 function preload() {
 
+    //load images
     monkeyLeft = loadImage('images/monkeyLeft.png');
     monkeyRight = loadImage('images/monkeyRight.png');
 
@@ -35,30 +36,34 @@ function preload() {
 }
 
 function setup() {
+
+    //create Canvas
     createCanvas(1000,500);
 
     noStroke();
 
+    //Load Objects
+
+    //character object
     character = new Character(width/2,height/2);
 
+    //soldiers
     for(var i = 0; i < numEnemies; i++ ) {
         enemy = new Soldier(random(0,width),random(height/3 + 100,height - 100),'Normal',character);
         if(i > 1) { enemy.isAlive = false; }
         enemies[i] = enemy;
     }
 
+    //environment object
     environment = new Environment(character,enemies);
 
-    for(var j = 0; j < 20; j++) {
-        rectColors[j] = [random(0.9,1.1),random(0.9,1.1),random(0.9,1.1)];
-        randomRects[j] = [random(0,width),random(height/3,height),random(10,width/2),random(10,height/2)];
-    }
-
+    //pause screen object
     pauseScreen = new PauseScreen(environment);
 }
 
 function draw() {
 
+    //check if paused
     if(pauseScreen.isPause) {
         pauseScreen.display();
         pauseScreen.checkPause();

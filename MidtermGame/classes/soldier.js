@@ -29,6 +29,11 @@ class Soldier {
     this.sizeX = this.currentImage.width * 0.2;
     this.sizeY = this.currentImage.height * 0.2;
 
+    this.leftSide   = this.xPos - (this.sizeX / 2);
+    this.rightSide  = this.xPos + (this.sizeX / 2);
+    this.topSide    = this.yPos - (this.sizeY / 2);
+    this.bottomSide = this.yPos + (this.sizeY / 2);
+
     this.size = this.sizeX;
 
     //weapons
@@ -112,6 +117,16 @@ class Soldier {
       this.manuever();
     }
 
+    this.leftSide   = this.xPos - (this.sizeX / 2);
+    this.rightSide  = this.xPos + (this.sizeX / 2);
+    this.topSide    = this.yPos - (this.sizeY / 2);
+    this.bottomSide = this.yPos + (this.sizeY / 2);
+
+    line(this.leftSide,this.topSide,this.rightSide,this.topSide)
+    line(this.leftSide,this.bottomSide,this.rightSide,this.bottomSide)
+    line(this.leftSide,this.bottomSide,this.leftSide,this.topSide)
+    line(this.rightSide,this.bottomSide,this.rightSide,this.topSide)
+
   }
 
 
@@ -121,7 +136,7 @@ class Soldier {
 
     if(this.version == 'Normal') {
 
-      if( this.yPos < this.character.yPos + 20  && this.yPos > this.character.yPos - 20) {
+      if( this.yPos > this.character.topSide  && this.yPos < this.character.bottomSide ) {
         if( this.character.xPos < this.xPos && this.direction == 'W' ) {
 
           this.projectiles[0].setProjectile(this.xPos,this.yPos,this.direction);
@@ -138,7 +153,7 @@ class Soldier {
 
     if(this.version == 'Strong') {
 
-      if( this.yPos < this.character.yPos + 20  && this.yPos > this.character.yPos - 20) {
+      if( this.yPos > this.character.topSide  && this.yPos < this.character.bottomSide ) {
         if( this.character.xPos < this.xPos && this.direction == 'W' ) {
 
           this.projectiles[0].setProjectile(this.xPos,this.yPos,this.direction);
@@ -157,7 +172,7 @@ class Soldier {
 
     if(this.version == 'Dark') {
 
-      if( this.yPos < this.character.yPos + 20  && this.yPos > this.character.yPos - 20) {
+      if( this.yPos > this.character.topSide  && this.yPos < this.character.bottomSide ) {
         if( this.character.xPos < this.xPos && this.direction == 'W' ) {
 
           this.projectiles[0].setProjectile(this.xPos,this.yPos,this.direction);

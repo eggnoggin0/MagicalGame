@@ -34,9 +34,11 @@ class Environment {
         this.enemies[enemyIndex].isAlive = false;
       }
     }
+
+    //enemy hitting character
     for(var i = 0; i < this.enemies[enemyIndex].projectiles.length; i++) {
       if(this.enemies[enemyIndex].projectiles[i].checkHits(this.character)) {
-        this.character.isAlive = false;
+        this.character.deductHealth();
       }
     }
 
@@ -109,12 +111,6 @@ class Environment {
 
     stroke(0);
 
-    /*for(var i = 0; i < randomRects.length; i++){
-      fill(86*rectColors[i][0],80*rectColors[i][1],60*rectColors[i][2]);
-      rect(randomRects[i][0],randomRects[i][1],randomRects[i][2],randomRects[i][3])
-    }*/
-
-
   }
 
   displayPastEnvironment() {
@@ -154,8 +150,6 @@ class Environment {
       var noiseValue = noise( offset + x/100 );
       var noiseHeight = map( noiseValue, 0, 1,height/5,height/3);
 
-      //point( x, noiseHeight);
-
       vertex(x,noiseHeight);
 
     }
@@ -166,11 +160,6 @@ class Environment {
     endShape();
 
     stroke(0);
-
-    /*for(var i = 0; i < randomRects.length; i++){
-      fill(86*rectColors[i][0],80*rectColors[i][1],60*rectColors[i][2]);
-      rect(randomRects[i][0],randomRects[i][1],randomRects[i][2],randomRects[i][3])
-    }*/
 
   }
 
@@ -208,7 +197,7 @@ class Environment {
       }
 
     }
-    
+
     else if (this.character.changeTimeMeter > 90) {
       background(255);
       this.character.changeTime();
