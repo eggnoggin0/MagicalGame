@@ -101,7 +101,7 @@ class Character {
 
     //electricity
     if(this.magicMeter > 0.1) {
-      if(keyIsDown(78)) {
+      if(keyIsDown(74)) {
         var temp = new Projectiles(this.xPos,this.yPos,this.direction);
         this.projectiles.push(temp);
         this.magicMeter -= 0.1;
@@ -112,7 +112,7 @@ class Character {
     if(this.fireTime == 0) {
       if(this.magicMeter > 10) {
 
-        if(keyIsDown(66)) {
+        if(keyIsDown(75)) {
           this.fireTime = this.fireLimit;
           this.magicMeter -= 10;
           for(var i = 0; i < this.fireLimit; i++ ){
@@ -132,7 +132,7 @@ class Character {
 
     if(this.timeIsStopped == false) {
       if(this.magicMeter > 10) {
-        if(keyIsDown(77)) {
+        if(keyIsDown(73)) {
           this.timeLimit = this.stoppedTimeLimit;
           this.magicMeter -= 10;
         }
@@ -161,7 +161,7 @@ class Character {
 
     if(this.magicMeter > 5) {
       if(this.teleportTime == 0) {
-        if(keyIsDown(75)) {
+        if(keyIsDown(76)) {
           if( this.teleportDirection == 'N' ) {
             if( this.yPos - this.teleportLength > height / 3) {
               this.yPos -= this.teleportLength;
@@ -188,7 +188,7 @@ class Character {
   //change time periods
   changeTime() {
     if(this.changeTimeMeter == 0) {
-      if(keyIsDown(84)) {
+      if(keyIsDown(79)) {
         this.changeTimeMeter = this.changeTimeLimit;
         if(this.inPresent) {
           this.inPresent = false;
