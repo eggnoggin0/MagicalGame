@@ -57,8 +57,8 @@ class Environment {
 
                 if(i < this.screenNum) {
                     if(i <= 3) { this.enemies[i].setSoldier(random(100,width),random(height/3 + 100,height-100),'Normal',true); }
-                    else if(i > 3 && i <=6 ) { this.enemies[i].setSoldier(random(100,width),random(height/3 + 100,height-100),'Strong',true); }
-                    else if( i > 6 ){ this.enemies[i].setSoldier(random(100,width),random(height/3 + 100,height-100),'Dark',false); }
+                    else if( i > 3 && i <=6 ) { this.enemies[i].setSoldier(random(100,width),random(height/3 + 100,height-100),'Strong',true); }
+                    else if( i > 6 ){ this.enemies[i].setSoldier(random(100,width),random(height/3 + 100,height-100),'Dark',true); }
                 }
 
             }
