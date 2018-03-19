@@ -1,6 +1,6 @@
 //Variables
 var enemies = [];
-var numEnemies = 10;
+var numEnemies = 15;
 var offset = 0;
 var randomRects = [];
 var rectColors = [];

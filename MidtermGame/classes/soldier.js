@@ -7,6 +7,7 @@ class Soldier {
 
     if(this.version == 'Normal') { this.imageLeft = normalBatLeft; this.imageRight = normalBatRight; }
     if(this.version == 'Strong') { this.imageLeft = strongBatLeft; this.imageRight = strongBatRight; }
+    if(this.version == 'Dark') { this.imageLeft = darkBatLeft; this.imageRight = darkBatRight; }
 
     this.currentImage = this.imageLeft;
 
