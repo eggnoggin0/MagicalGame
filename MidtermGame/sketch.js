@@ -20,6 +20,13 @@ var darkBatRight;
 
 var bananas;
 
+//sounds
+var changeTimelines;
+var explodeFire;
+var shootElectricity;
+var stopTime;
+var teleport;
+
 function preload() {
 
     //load images
@@ -34,8 +41,15 @@ function preload() {
 
     darkBatLeft = loadImage('images/darkBatLeft.png');
     darkBatRight = loadImage('images/darkBatRight.png');
-    
+
     //bananas = loadImage();
+
+    //load sounds
+    changeTimelines = loadSound('sounds/ChangeTimelines.mp3');
+    explodeFire = loadSound('sounds/ExplodeFire.mp3');
+    shootElectricity = loadSound('sounds/ShootElectricity');
+    stopTime = loadSound('sounds/StopTime');
+    teleport = loadSound('sounds/Teleport');
 
 }
 
