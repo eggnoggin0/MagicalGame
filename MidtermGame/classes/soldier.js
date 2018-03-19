@@ -174,22 +174,20 @@ class Soldier {
 
     if(this.version == 'Dark') {
 
-      if( this.yPos > this.character.topSide  && this.yPos < this.character.bottomSide ) {
-        if( this.character.xPos < this.xPos && this.direction == 'W' ) {
+      if( this.character.xPos < this.xPos && this.direction == 'W' ) {
 
-          this.projectiles[0].setProjectile(this.xPos,this.yPos,this.direction);
-          this.projectiles[1].setProjectile(this.xPos,this.yPos,this.direction);
-          this.projectiles[2].setProjectile(this.xPos,this.yPos,this.direction);
+        this.projectiles[0].setProjectile(this.xPos,this.yPos,this.direction);
+        this.projectiles[1].setProjectile(this.xPos,this.yPos,this.direction);
+        this.projectiles[2].setProjectile(this.xPos,this.yPos,this.direction);
 
-        }
+      }
 
-        if( this.character.xPos > this.xPos && this.direction == 'E' ) {
+      if( this.character.xPos > this.xPos && this.direction == 'E' ) {
 
-          this.projectiles[0].setProjectile(this.xPos,this.yPos,this.direction);
-          this.projectiles[1].setProjectile(this.xPos,this.yPos,this.direction);
-          this.projectiles[2].setProjectile(this.xPos,this.yPos,this.direction);
+        this.projectiles[0].setProjectile(this.xPos,this.yPos,this.direction);
+        this.projectiles[1].setProjectile(this.xPos,this.yPos,this.direction);
+        this.projectiles[2].setProjectile(this.xPos,this.yPos,this.direction);
 
-        }
       }
     }
   }
@@ -213,7 +211,6 @@ class Soldier {
       line(this.leftSide,this.bottomSide,this.rightSide,this.bottomSide)
       line(this.leftSide,this.bottomSide,this.leftSide,this.topSide)
       line(this.rightSide,this.bottomSide,this.rightSide,this.topSide)
-
 
       imageMode(CENTER);
 

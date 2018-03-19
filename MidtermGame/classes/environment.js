@@ -1,30 +1,31 @@
 class Environment {
 
     //
-    constructor(character, enemies) {
+    constructor() {
 
         //
         this.noiseValue = 0;
         this.noiseScale = 0.02;
 
         //
-        this.character = character;
-        this.enemies   = enemies;
-
         this.item = new MagicItems(random(0,width),random(height/3,height),this.character);
         this.itemIndex = 0;
+
+        //character object
+        this.character = new Character(width/2,height/2);
+
+        //soldiers
+        this.enemies = [];
+        this.nightEnemy = new Soldier(width/2,height/2,'Dark',this.character);
+        this.nightEnemy.isAlive = true;
+        for(var i = 0; i < numEnemies; i++ ) {
+            this.enemies[i] = new Soldier(random(0,width),random(height/3 + 100,height - 100),'Normal',this.character);
+            if(i > 0) { this.enemies[i].isAlive = false; }
+        }
 
         this.screenNum = 1;
 
     }
-
-    /*reviveItems() {
-
-    if(parseInt(random(0,2)) == 1) {
-      this.item.exist = true;
-    }
-
-  }*/
 
     //check if hit enemy
     checkHits(enemyIndex) {
@@ -45,6 +46,17 @@ class Environment {
 
     }
 
+    checkNightHits() {
+
+        //enemy hitting character, enemy is invincible
+        for(var i = 0; i < this.nightEnemy.projectiles.length; i++) {
+            if(this.nightEnemy.projectiles[i].checkHits(this.character)) {
+                this.character.deductHealth();
+            }
+        }
+
+    }
+
     //check if move screen
     checkPosition() {
 
@@ -56,9 +68,9 @@ class Environment {
             for(var i = 0; i < this.enemies.length; i++) {
 
                 if(i < this.screenNum) {
-                    if(i <= 3) { this.enemies[i].setSoldier(random(100,width),random(height/3 + 100,height-100),'Normal',true); }
+                    if( i <= 3 ) { this.enemies[i].setSoldier(random(100,width),random(height/3 + 100,height-100),'Normal',true); }
                     else if( i > 3 && i <=6 ) { this.enemies[i].setSoldier(random(100,width),random(height/3 + 100,height-100),'Strong',true); }
-                    else if( i > 6 ){ this.enemies[i].setSoldier(random(100,width),random(height/3 + 100,height-100),'Dark',true); }
+                    else if( i > 6 ) { this.enemies[i].setSoldier(random(100,width),random(height/3 + 100,height-100),'Dark',true); }
                 }
 
             }
@@ -122,13 +134,13 @@ class Environment {
     //change environment to past
     displayPastEnvironment() {
 
-        background(255,248,220);
+        background(19,24,98);
 
-        fill(76,70,50)
+        fill(135,136,156)
         rect(0,height/3,width,2*height/3)
         noStroke();
 
-        fill(139,69,19);
+        fill(46,68,130);
 
         beginShape();
 
@@ -147,7 +159,7 @@ class Environment {
 
         endShape();
 
-        fill(210,180,140);
+        fill(190,169,222);
 
         beginShape();
 
@@ -216,10 +228,13 @@ class Environment {
             this.character.display();
             this.item.display();
 
+            this.nightEnemy.moveAndDisplay();
+            this.checkNightHits();
+
             this.checkPosition();
 
-
         }
+
         //display controls
         fill(0);
         textSize(20);

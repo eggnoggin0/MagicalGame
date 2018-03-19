@@ -48,18 +48,9 @@ function setup() {
 
     //Load Objects
 
-    //character object
-    character = new Character(width/2,height/2);
-
-    //soldiers
-    for(var i = 0; i < numEnemies; i++ ) {
-        enemy = new Soldier(random(0,width),random(height/3 + 100,height - 100),'Normal',character);
-        if(i > 1) { enemy.isAlive = false; }
-        enemies[i] = enemy;
-    }
 
     //environment object
-    environment = new Environment(character,enemies);
+    environment = new Environment();
 
     //pause screen object
     pauseScreen = new PauseScreen(environment);
