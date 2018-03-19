@@ -18,6 +18,8 @@ var strongBatRight;
 var darkBatLeft;
 var darkBatRight;
 
+var bananas;
+
 function preload() {
 
     //load images
@@ -32,6 +34,8 @@ function preload() {
 
     darkBatLeft = loadImage('images/darkBatLeft.png');
     darkBatRight = loadImage('images/darkBatRight.png');
+    
+    //bananas = loadImage();
 
 }
 
