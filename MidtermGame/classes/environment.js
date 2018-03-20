@@ -15,15 +15,19 @@ class Environment {
         this.character = new Character(width/2,height/2);
 
         //soldiers
-        this.enemies = [];
+
         this.nightEnemy = new Soldier(width/2,height/2,'Dark',this.character);
         this.nightEnemy.isAlive = true;
+
+        this.enemies = [];
         for(var i = 0; i < numEnemies; i++ ) {
             this.enemies[i] = new Soldier(random(0,width),random(height/3 + 100,height - 100),'Normal',this.character);
             if(i > 0) { this.enemies[i].isAlive = false; }
         }
 
-        this.screenNum = 1;
+        this.screenNum = 9;
+
+        this.endGoal = new EndGoal(this.character);
 
     }
 
@@ -80,6 +84,7 @@ class Environment {
         }
     }
 
+
     //show environment in present
     displayPresentEnvironment() {
 
@@ -128,6 +133,8 @@ class Environment {
         endShape();
 
         stroke(0);
+
+        this.endGoal.checkEnd(this.screenNum);
 
     }
 
@@ -186,6 +193,7 @@ class Environment {
     display() {
 
         if(this.character.inPresent) {
+
             if (this.character.changeTimeMeter > 90) {
                 background(255);
                 this.character.changeTime();

@@ -18,7 +18,7 @@ var strongBatRight;
 var darkBatLeft;
 var darkBatRight;
 
-var bananas;
+var bananaImage;
 
 function preload() {
 
@@ -34,8 +34,8 @@ function preload() {
 
     darkBatLeft = loadImage('images/darkBatLeft.png');
     darkBatRight = loadImage('images/darkBatRight.png');
-    
-    //bananas = loadImage();
+
+    bananaImage = loadImage('images/food.png');
 
 }
 
@@ -47,7 +47,6 @@ function setup() {
     noStroke();
 
     //Load Objects
-
 
     //environment object
     environment = new Environment();
@@ -64,7 +63,9 @@ function draw() {
         pauseScreen.checkPause();
     }
     else {
+
         environment.display();
+        //image(bananaImage,width/2,height/2,100,100);
         pauseScreen.checkPause();
     }
 }
