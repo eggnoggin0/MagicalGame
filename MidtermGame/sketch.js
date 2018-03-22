@@ -42,18 +42,14 @@ function preload() {
     darkBatLeft = loadImage('images/darkBatLeft.png');
     darkBatRight = loadImage('images/darkBatRight.png');
 
-<<<<<<< HEAD
     bananaImage = loadImage('images/food.png');
-=======
-    //bananas = loadImage();
->>>>>>> origin/master
 
     //load sounds
     changeTimelines = loadSound('sounds/ChangeTimelines.mp3');
     explodeFire = loadSound('sounds/ExplodeFire.mp3');
-    shootElectricity = loadSound('sounds/ShootElectricity');
-    stopTime = loadSound('sounds/StopTime');
-    teleport = loadSound('sounds/Teleport');
+    shootElectricity = loadSound('sounds/ShootElectricity.mp3');
+    stopTime = loadSound('sounds/StopTime.mp3');
+    teleport = loadSound('sounds/Teleport.mp3');
 
 }
 
