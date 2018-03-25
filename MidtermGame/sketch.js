@@ -60,26 +60,16 @@ function setup() {
 
   noStroke();
 
-  //Load Objects
-
-  //environment object
-  environment = new Environment();
+  //Load Object
 
   //pause screen object
-  pauseScreen = new PauseScreen(environment);
+  pauseScreen = new PauseScreen();
+  pauseScreen.createEnvironment();
+  
 }
 
 function draw() {
 
-  //check if paused
-  if(pauseScreen.isPause) {
-    pauseScreen.display();
-    pauseScreen.checkPause();
-  }
-  else {
+  pauseScreen.display();
 
-    environment.display();
-    //image(bananaImage,width/2,height/2,100,100);
-    pauseScreen.checkPause();
-  }
 }
