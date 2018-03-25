@@ -21,6 +21,7 @@ class PauseScreen {
                 this.pauseTime = this.pauseLatency;
                 if(this.isPause) { this.isPause = false; }
                 else { this.isPause = true; }
+                if(this.environment.restart) { this.createEnvironment(); }
             }
         }
         else {
@@ -54,6 +55,7 @@ class PauseScreen {
 
         this.environment.display();
         this.checkPause();
+
       }
 
     }
