@@ -29,57 +29,57 @@ var teleport;
 
 function preload() {
 
-    //load images
-    monkeyLeft = loadImage('images/monkeyLeft.png');
-    monkeyRight = loadImage('images/monkeyRight.png');
+  //load images
+  monkeyLeft = loadImage('images/monkeyLeft.png');
+  monkeyRight = loadImage('images/monkeyRight.png');
 
-    normalBatLeft = loadImage('images/normalBatLeft.png');
-    normalBatRight = loadImage('images/normalBatRight.png');
+  normalBatLeft = loadImage('images/normalBatLeft.png');
+  normalBatRight = loadImage('images/normalBatRight.png');
 
-    strongBatLeft = loadImage('images/strongBatLeft.png');
-    strongBatRight = loadImage('images/strongBatRight.png');
+  strongBatLeft = loadImage('images/strongBatLeft.png');
+  strongBatRight = loadImage('images/strongBatRight.png');
 
-    darkBatLeft = loadImage('images/darkBatLeft.png');
-    darkBatRight = loadImage('images/darkBatRight.png');
+  darkBatLeft = loadImage('images/darkBatLeft.png');
+  darkBatRight = loadImage('images/darkBatRight.png');
 
-    bananaImage = loadImage('images/food.png');
+  bananaImage = loadImage('images/food.png');
 
-    //load sounds
-    changeTimelines = loadSound('sounds/ChangeTimelines.mp3');
-    explodeFire = loadSound('sounds/ExplodeFire.mp3');
-    shootElectricity = loadSound('sounds/ShootElectricity.mp3');
-    stopTime = loadSound('sounds/StopTime.mp3');
-    teleport = loadSound('sounds/Teleport.mp3');
+  //load sounds
+  changeTimelines = loadSound('sounds/ChangeTimelines.mp3');
+  explodeFire = loadSound('sounds/ExplodeFire.mp3');
+  shootElectricity = loadSound('sounds/ShootElectricity.mp3');
+  stopTime = loadSound('sounds/StopTime.mp3');
+  teleport = loadSound('sounds/Teleport.mp3');
 
 }
 
 function setup() {
 
-    //create Canvas
-    createCanvas(1000,500);
+  //create Canvas
+  createCanvas(1000,500);
 
-    noStroke();
+  noStroke();
 
-    //Load Objects
+  //Load Objects
 
-    //environment object
-    environment = new Environment();
+  //environment object
+  environment = new Environment();
 
-    //pause screen object
-    pauseScreen = new PauseScreen(environment);
+  //pause screen object
+  pauseScreen = new PauseScreen(environment);
 }
 
 function draw() {
 
-    //check if paused
-    if(pauseScreen.isPause) {
-        pauseScreen.display();
-        pauseScreen.checkPause();
-    }
-    else {
+  //check if paused
+  if(pauseScreen.isPause) {
+    pauseScreen.display();
+    pauseScreen.checkPause();
+  }
+  else {
 
-        environment.display();
-        //image(bananaImage,width/2,height/2,100,100);
-        pauseScreen.checkPause();
-    }
+    environment.display();
+    //image(bananaImage,width/2,height/2,100,100);
+    pauseScreen.checkPause();
+  }
 }

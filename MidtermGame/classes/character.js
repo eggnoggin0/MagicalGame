@@ -63,6 +63,15 @@ class Character {
     this.changeTimeLimit = 100;
     this.changeTimeMeter = 0;
 
+    //sounds
+    this.teleportSound = teleport;
+    this.changeTimelinesSound = changeTimelines;
+    this.stopTimeSound = stopTime;
+    this.explodeFireSound = explodeFire;
+    this.shootElectricitySound = shootElectricity;
+
+    //electricity envelope flag allows a "press and hold effect" for the sound
+    this.electricityEnvelopeFlag = 0;
   }
 
   //movement
@@ -102,17 +111,28 @@ class Character {
     //electricity
     if(this.magicMeter > 0.1) {
       if(keyIsDown(74)) {
+        if (this.electricityEnvelopeFlag == 0) {
+          //this.electricityNoise.start();
+          this.shootElectricitySound.play();
+        }
+        this.electricityEnvelopeFlag++;
         var temp = new Projectiles(this.xPos,this.yPos,this.direction);
         this.projectiles.push(temp);
         this.magicMeter -= 0.1;
+      }
+      else {
+        this.electricityEnvelopeFlag = 0;
+        this.shootElectricitySound.stop();
       }
     }
 
     //fire
     if(this.fireTime == 0) {
       if(this.magicMeter > 10) {
-
         if(keyIsDown(75)) {
+          if(keyIsPressed) { //stops sound when key is lifted
+            this.explodeFireSound.play();
+          }
           this.fireTime = this.fireLimit;
           this.magicMeter -= 10;
           for(var i = 0; i < this.fireLimit; i++ ){
@@ -127,12 +147,18 @@ class Character {
     }
   }
 
+  //play electricity sounds
+  playElectricitySound() {
+    this.electricityEnv.play();
+  }
+
   //stop time
   stopTime() {
 
     if(this.timeIsStopped == false) {
       if(this.magicMeter > 10) {
         if(keyIsDown(73)) {
+          this.stopTimeSound.play();
           this.timeLimit = this.stoppedTimeLimit;
           this.magicMeter -= 10;
         }
@@ -162,6 +188,7 @@ class Character {
     if(this.magicMeter > 5) {
       if(this.teleportTime == 0) {
         if(keyIsDown(76)) {
+          this.teleportSound.play();
           if( this.teleportDirection == 'N' ) {
             if( this.yPos - this.teleportLength > height / 3) {
               this.yPos -= this.teleportLength;
@@ -189,6 +216,7 @@ class Character {
   changeTime() {
     if(this.changeTimeMeter == 0) {
       if(keyIsDown(79)) {
+        this.changeTimelinesSound.play();
         this.changeTimeMeter = this.changeTimeLimit;
         if(this.inPresent) {
           this.inPresent = false;

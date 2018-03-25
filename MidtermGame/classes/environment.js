@@ -1,253 +1,253 @@
 class Environment {
 
+  //
+  constructor() {
+
     //
-    constructor() {
+    this.noiseValue = 0;
+    this.noiseScale = 0.02;
 
-        //
-        this.noiseValue = 0;
-        this.noiseScale = 0.02;
+    //
+    this.item = new MagicItems(random(0,width),random(height/3,height),this.character);
+    this.itemIndex = 0;
 
-        //
-        this.item = new MagicItems(random(0,width),random(height/3,height),this.character);
-        this.itemIndex = 0;
+    //character object
+    this.character = new Character(width/2,height/2);
 
-        //character object
-        this.character = new Character(width/2,height/2);
+    //soldiers
 
-        //soldiers
+    this.nightEnemy = new Soldier(width/2,height/2,'Dark',this.character);
+    this.nightEnemy.isAlive = true;
 
-        this.nightEnemy = new Soldier(width/2,height/2,'Dark',this.character);
-        this.nightEnemy.isAlive = true;
+    this.enemies = [];
+    for(var i = 0; i < numEnemies; i++ ) {
+      this.enemies[i] = new Soldier(random(0,width),random(height/3 + 100,height - 100),'Normal',this.character);
+      if(i > 0) { this.enemies[i].isAlive = false; }
+    }
 
-        this.enemies = [];
-        for(var i = 0; i < numEnemies; i++ ) {
-            this.enemies[i] = new Soldier(random(0,width),random(height/3 + 100,height - 100),'Normal',this.character);
-            if(i > 0) { this.enemies[i].isAlive = false; }
+    this.screenNum = 9;
+
+    this.endGoal = new EndGoal(this.character);
+
+  }
+
+  //check if hit enemy
+  checkHits(enemyIndex) {
+
+    //character hitting enemy
+    for(var i = 0; i < this.character.projectiles.length; i++){
+      if(this.character.projectiles[i].checkHits(this.enemies[enemyIndex])) {
+        this.enemies[enemyIndex].isAlive = false;
+      }
+    }
+
+    //enemy hitting character
+    for(var i = 0; i < this.enemies[enemyIndex].projectiles.length; i++) {
+      if(this.enemies[enemyIndex].projectiles[i].checkHits(this.character)) {
+        this.character.deductHealth();
+      }
+    }
+
+  }
+
+  checkNightHits() {
+
+    //enemy hitting character, enemy is invincible
+    for(var i = 0; i < this.nightEnemy.projectiles.length; i++) {
+      if(this.nightEnemy.projectiles[i].checkHits(this.character)) {
+        this.character.deductHealth();
+      }
+    }
+
+  }
+
+  //check if move screen
+  checkPosition() {
+
+    if(this.character.xPos > width) {
+      offset += width;
+      this.character.xPos = 0;
+
+      //change enemies
+      for(var i = 0; i < this.enemies.length; i++) {
+
+        if(i < this.screenNum) {
+          if( i <= 3 ) { this.enemies[i].setSoldier(random(100,width),random(height/3 + 100,height-100),'Normal',true); }
+          else if( i > 3 && i <=6 ) { this.enemies[i].setSoldier(random(100,width),random(height/3 + 100,height-100),'Strong',true); }
+          else if( i > 6 ) { this.enemies[i].setSoldier(random(100,width),random(height/3 + 100,height-100),'Dark',true); }
         }
 
-        this.screenNum = 9;
+      }
 
-        this.endGoal = new EndGoal(this.character);
+      this.screenNum++;
+
+    }
+  }
+
+
+  //show environment in present
+  displayPresentEnvironment() {
+
+    background(173,216,230);
+
+    fill(76,70,50)
+    rect(0,height/3,width,2*height/3)
+    noStroke();
+
+    fill(0,50,0);
+
+    beginShape();
+
+    var x;
+    for (x = 0; x < width; x++ ) {
+
+      var noiseValue = noise( offset + x/100 );
+      var noiseHeight = map( noiseValue, 0, 1, 0,height/3);
+
+      vertex(x,noiseHeight);
 
     }
 
-    //check if hit enemy
-    checkHits(enemyIndex) {
+    vertex(width,height/3);
+    vertex(0,height/3);
 
-        //character hitting enemy
-        for(var i = 0; i < this.character.projectiles.length; i++){
-            if(this.character.projectiles[i].checkHits(this.enemies[enemyIndex])) {
-                this.enemies[enemyIndex].isAlive = false;
-            }
-        }
+    endShape();
 
-        //enemy hitting character
-        for(var i = 0; i < this.enemies[enemyIndex].projectiles.length; i++) {
-            if(this.enemies[enemyIndex].projectiles[i].checkHits(this.character)) {
-                this.character.deductHealth();
-            }
-        }
+    fill(0,150,0);
 
-    }
+    beginShape();
 
-    checkNightHits() {
+    var x;
+    for (x = 0; x < width; x++ ) {
 
-        //enemy hitting character, enemy is invincible
-        for(var i = 0; i < this.nightEnemy.projectiles.length; i++) {
-            if(this.nightEnemy.projectiles[i].checkHits(this.character)) {
-                this.character.deductHealth();
-            }
-        }
+      var noiseValue = noise( offset + x/100 );
+      var noiseHeight = map( noiseValue, 0, 1,height/5,height/3);
+
+      vertex(x,noiseHeight);
 
     }
 
-    //check if move screen
-    checkPosition() {
+    vertex(width,height/3);
+    vertex(0,height/3);
 
-        if(this.character.xPos > width) {
-            offset += width;
-            this.character.xPos = 0;
+    endShape();
 
-            //change enemies
-            for(var i = 0; i < this.enemies.length; i++) {
+    stroke(0);
 
-                if(i < this.screenNum) {
-                    if( i <= 3 ) { this.enemies[i].setSoldier(random(100,width),random(height/3 + 100,height-100),'Normal',true); }
-                    else if( i > 3 && i <=6 ) { this.enemies[i].setSoldier(random(100,width),random(height/3 + 100,height-100),'Strong',true); }
-                    else if( i > 6 ) { this.enemies[i].setSoldier(random(100,width),random(height/3 + 100,height-100),'Dark',true); }
-                }
+    this.endGoal.checkEnd(this.screenNum);
 
-            }
+  }
 
-            this.screenNum++;
+  //change environment to past
+  displayPastEnvironment() {
 
-        }
-    }
+    background(19,24,98);
 
+    fill(135,136,156)
+    rect(0,height/3,width,2*height/3)
+    noStroke();
 
-    //show environment in present
-    displayPresentEnvironment() {
+    fill(46,68,130);
 
-        background(173,216,230);
+    beginShape();
 
-        fill(76,70,50)
-        rect(0,height/3,width,2*height/3)
-        noStroke();
+    var x;
+    for (x = 0; x < width; x++ ) {
 
-        fill(0,50,0);
+      var noiseValue = noise( offset + x/100 );
+      var noiseHeight = map( noiseValue, 0, 1, 0,height/3);
 
-        beginShape();
-
-        var x;
-        for (x = 0; x < width; x++ ) {
-
-            var noiseValue = noise( offset + x/100 );
-            var noiseHeight = map( noiseValue, 0, 1, 0,height/3);
-
-            vertex(x,noiseHeight);
-
-        }
-
-        vertex(width,height/3);
-        vertex(0,height/3);
-
-        endShape();
-
-        fill(0,150,0);
-
-        beginShape();
-
-        var x;
-        for (x = 0; x < width; x++ ) {
-
-            var noiseValue = noise( offset + x/100 );
-            var noiseHeight = map( noiseValue, 0, 1,height/5,height/3);
-
-            vertex(x,noiseHeight);
-
-        }
-
-        vertex(width,height/3);
-        vertex(0,height/3);
-
-        endShape();
-
-        stroke(0);
-
-        this.endGoal.checkEnd(this.screenNum);
+      vertex(x,noiseHeight);
 
     }
 
-    //change environment to past
-    displayPastEnvironment() {
+    vertex(width,height/3);
+    vertex(0,height/3);
 
-        background(19,24,98);
+    endShape();
 
-        fill(135,136,156)
-        rect(0,height/3,width,2*height/3)
-        noStroke();
+    fill(190,169,222);
 
-        fill(46,68,130);
+    beginShape();
 
-        beginShape();
+    var x;
+    for (x = 0; x < width; x++ ) {
 
-        var x;
-        for (x = 0; x < width; x++ ) {
+      var noiseValue = noise( offset + x/100 );
+      var noiseHeight = map( noiseValue, 0, 1,height/5,height/3);
 
-            var noiseValue = noise( offset + x/100 );
-            var noiseHeight = map( noiseValue, 0, 1, 0,height/3);
-
-            vertex(x,noiseHeight);
-
-        }
-
-        vertex(width,height/3);
-        vertex(0,height/3);
-
-        endShape();
-
-        fill(190,169,222);
-
-        beginShape();
-
-        var x;
-        for (x = 0; x < width; x++ ) {
-
-            var noiseValue = noise( offset + x/100 );
-            var noiseHeight = map( noiseValue, 0, 1,height/5,height/3);
-
-            vertex(x,noiseHeight);
-
-        }
-
-        vertex(width,height/3);
-        vertex(0,height/3);
-
-        endShape();
-
-        stroke(0);
+      vertex(x,noiseHeight);
 
     }
 
-    //display whole environment
-    display() {
+    vertex(width,height/3);
+    vertex(0,height/3);
 
-        if(this.character.inPresent) {
+    endShape();
 
-            if (this.character.changeTimeMeter > 90) {
-                background(255);
-                this.character.changeTime();
-            }
+    stroke(0);
 
-            else {
+  }
 
-                this.displayPresentEnvironment();
+  //display whole environment
+  display() {
 
-                this.character.display();
-                this.item.display();
+    if(this.character.inPresent) {
 
-                this.checkPosition();
+      if (this.character.changeTimeMeter > 90) {
+        background(255);
+        this.character.changeTime();
+      }
 
-                if(this.character.timeIsStopped) {
-                    for(var i = 0; i < this.enemies.length; i++ ){
-                        this.enemies[i].stoppedAndDisplay();
-                        this.checkHits(i);
-                    }
-                }
-                else {
-                    for(var i = 0; i < this.enemies.length; i++ ){
-                        this.enemies[i].moveAndDisplay();
-                        this.checkHits(i);
-                    }
+      else {
 
+        this.displayPresentEnvironment();
 
-                }
-            }
+        this.character.display();
+        this.item.display();
 
-        }
+        this.checkPosition();
 
-        else if (this.character.changeTimeMeter > 90) {
-            background(255);
-            this.character.changeTime();
+        if(this.character.timeIsStopped) {
+          for(var i = 0; i < this.enemies.length; i++ ){
+            this.enemies[i].stoppedAndDisplay();
+            this.checkHits(i);
+          }
         }
         else {
+          for(var i = 0; i < this.enemies.length; i++ ){
+            this.enemies[i].moveAndDisplay();
+            this.checkHits(i);
+          }
 
-            this.displayPastEnvironment();
-            this.character.display();
-            this.item.display();
-
-            this.nightEnemy.moveAndDisplay();
-            this.checkNightHits();
-
-            this.checkPosition();
 
         }
+      }
 
-        //display controls
-        fill(0);
-        textSize(20);
-        textAlign(LEFT);
-
-        text('I: stop time  L: teleport  J: shoot electricity  K: explode fire  O: change timelines', 10, 20);
     }
+
+    else if (this.character.changeTimeMeter > 90) {
+      background(255);
+      this.character.changeTime();
+    }
+    else {
+
+      this.displayPastEnvironment();
+      this.character.display();
+      this.item.display();
+
+      this.nightEnemy.moveAndDisplay();
+      this.checkNightHits();
+
+      this.checkPosition();
+
+    }
+
+    //display controls
+    fill(0);
+    textSize(20);
+    textAlign(LEFT);
+
+    text('I: stop time  L: teleport  J: shoot electricity  K: explode fire  O: change timelines', 10, 20);
+  }
 }
