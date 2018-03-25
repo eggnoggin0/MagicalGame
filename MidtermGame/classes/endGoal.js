@@ -31,26 +31,36 @@ class EndGoal {
 
     this.screenNum = screenIndex;
 
-    //chek to see if last environment
-    if (this.screenNum == 10) {
+    //check to see if last environment
+    if (this.screenNum >= 10) {
       this.isLastEnvironment = true;
     }
 
     //display bananas
     if (this.isLastEnvironment) {
       image(this.bananaImage, this.xPos, this.yPos, this.bananaImage.width/8, this.bananaImage.height/8);
+      line(this.leftSide,this.topSide,this.rightSide,this.topSide)
+      line(this.leftSide,this.bottomSide,this.rightSide,this.bottomSide)
+      line(this.leftSide,this.bottomSide,this.leftSide,this.topSide)
+      line(this.rightSide,this.bottomSide,this.rightSide,this.topSide)
+
     }
 
     //check win
     if(this.character.xPos > this.leftSide &&
-      this.character.xPos< this.rightSide &&
-      this.character.yPos > this.bottomSide &&
-      this.character.yPos < this.topSide) {
+      this.character.xPos < this.rightSide &&
+      this.character.yPos < this.bottomSide &&
+      this.character.yPos > this.topSide && this.isLastEnvironment) {
       this.grabbedBananas = true;
+      return true;
     }
+    else { return false; }
+
+  }
+  displayEnd() {
 
     //display win
-    if (this.grabbedBananas) {
+    if (this.isLastEnvironment && this.grabbedBananas) {
       textSize(30);
       fill(0);
       textAlign(CENTER);

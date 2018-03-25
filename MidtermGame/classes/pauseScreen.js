@@ -3,9 +3,13 @@ class PauseScreen {
     constructor(environment) {
 
         this.isPause = true;
-        this.environment = environment;
+        //this.environment = environment;
         this.pauseLatency = 10;
         this.pauseTime = 0;
+    }
+
+    createEnvironment() {
+      this.environment = new Environment();
     }
 
     //check if paused
@@ -27,13 +31,26 @@ class PauseScreen {
     //display pause screen
     display() {
 
-        this.environment.displayPresentEnvironment();
+      //check if paused
+      if(this.isPause) {
         fill(0);
         textSize(30);
         textAlign(CENTER);
 
         text('Welcome to the World of Magic\nCONTROLS:\nI: stop time\nL: teleport\nJ: shoot electricity\nK: explode fire\nO: change timelines', width/2,height/2);
+        this.checkPause();
+      }
+      else if(this.isPause == false) {
 
+        this.environment.displayPresentEnvironment();
+        this.checkPause();
+      }
+
+      if(this.environment.restart) {
+        this.createEnvironment();
+        background(255);
+        this.isPause = true;
+      }
     }
 
 }

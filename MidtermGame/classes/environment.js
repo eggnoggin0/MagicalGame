@@ -28,6 +28,8 @@ class Environment {
     this.screenNum = 9;
 
     this.endGoal = new EndGoal(this.character);
+    this.isEnd = false;
+    this.restart = false;
 
   }
 
@@ -134,7 +136,7 @@ class Environment {
 
     stroke(0);
 
-    this.endGoal.checkEnd(this.screenNum);
+    this.isEnd = this.endGoal.checkEnd(this.screenNum);
 
   }
 
@@ -189,10 +191,39 @@ class Environment {
 
   }
 
+  displayEnd() {
+    textSize(30);
+    fill(0);
+    textAlign(CENTER);
+    text('You win!', width / 2, height / 2);
+    text('Press ENTER to play again', width / 2, height / 2 + 40);
+
+    if(keyIsDown(13)) {
+      /*//Alive
+      character.isAlive = true;
+
+      //Position
+      character.xPos = width/2;
+      character.yPos = height/2;
+
+      character.magicMeter = character.magicLimit;
+
+      character.health = 100;
+
+      this.screenNum = 0;
+      this.isEnd = false;
+      this.checkPosition();*/
+      this.restart = true;
+    }
+  }
   //display whole environment
   display() {
 
-    if(this.character.inPresent) {
+    if (this.isEnd) {
+      this.displayEnd();
+    }
+
+    else if(this.character.inPresent) {
 
       if (this.character.changeTimeMeter > 90) {
         background(255);
@@ -219,11 +250,8 @@ class Environment {
             this.enemies[i].moveAndDisplay();
             this.checkHits(i);
           }
-
-
         }
       }
-
     }
 
     else if (this.character.changeTimeMeter > 90) {
