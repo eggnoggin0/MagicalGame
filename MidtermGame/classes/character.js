@@ -72,6 +72,8 @@ class Character {
 
     //electricity envelope flag allows a "press and hold effect" for the sound
     this.electricityEnvelopeFlag = 0;
+
+    this.restart = false;
   }
 
   //movement
@@ -315,15 +317,7 @@ class Character {
 
       if(keyIsDown(13)) {
         //Alive
-        this.isAlive = true;
-
-        //Position
-        this.xPos = width/2;
-        this.yPos = height/2;
-
-        this.magicMeter = this.magicLimit;
-
-        this.health = 100;
+        this.restart = true;
 
       }
     }
