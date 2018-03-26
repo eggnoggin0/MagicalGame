@@ -25,7 +25,7 @@ class Environment {
       if(i > 0) { this.enemies[i].isAlive = false; }
     }
 
-    this.screenNum = 9;
+    this.screenNum = 0;
 
     this.endGoal = new EndGoal(this.character);
     this.isEnd = false;

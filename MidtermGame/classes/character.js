@@ -51,6 +51,7 @@ class Character {
     this.stoppedTimeLimit = 1000;
     this.timeLimit = 0;
 
+
     //teleportation
     this.teleportLength = 150;
     this.teleportLimit  = 100;
@@ -61,6 +62,8 @@ class Character {
     //time change
     this.inPresent = true;
     this.changeTimeLimit = 100;
+    this.futureTimeLimit = 1000;
+    this.futureTime = 0;
     this.changeTimeMeter = 0;
 
     //sounds
@@ -221,6 +224,7 @@ class Character {
         this.changeTimelinesSound.play();
         this.changeTimeMeter = this.changeTimeLimit;
         if(this.inPresent) {
+          this.futureTime = this.futureTimeLimit;
           this.inPresent = false;
         }
         else {
@@ -234,6 +238,20 @@ class Character {
 
   }
 
+  checkChangedTime() {
+
+    if(this.futureTime > 0) {
+      fill(255);
+      textSize(50);
+      text(parseInt(this.futureTime / 100), width - 50,50);
+      this.futureTime--;
+      if(this.futureTime == 1){ this.changeTimelinesSound.play(); }
+    }
+    else {
+      this.inPresent = true;
+    }
+  }
+
   //attack function
   useAttacks() {
     this.createProjectiles();
@@ -241,6 +259,7 @@ class Character {
     this.checkTime();
     this.teleport();
     this.changeTime();
+    this.checkChangedTime();
   }
 
   //health
