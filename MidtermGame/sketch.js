@@ -33,11 +33,11 @@ function preload() {
   monkeyLeft = loadImage('images/monkeyLeft.png');
   monkeyRight = loadImage('images/monkeyRight.png');
 
-  normalBatLeft = loadImage('images/normalBatLeft.png');
-  normalBatRight = loadImage('images/normalBatRight.png');
+  normalBatLeft = loadImage('images/normalbatLeft.png');
+  normalBatRight = loadImage('images/normalbatRight.png');
 
-  strongBatLeft = loadImage('images/strongBatLeft.png');
-  strongBatRight = loadImage('images/strongBatRight.png');
+  strongBatLeft = loadImage('images/strongbatLeft.png');
+  strongBatRight = loadImage('images/strongbatRight.png');
 
   darkBatLeft = loadImage('images/darkBatLeft.png');
   darkBatRight = loadImage('images/darkBatRight.png');
@@ -65,7 +65,7 @@ function setup() {
   //pause screen object
   pauseScreen = new PauseScreen();
   pauseScreen.createEnvironment();
-  
+
 }
 
 function draw() {
