@@ -312,10 +312,10 @@ class Character {
       /*line(this.leftSide,this.topSide,this.rightSide,this.topSide)
       line(this.leftSide,this.bottomSide,this.rightSide,this.bottomSide)
       line(this.leftSide,this.bottomSide,this.leftSide,this.topSide)
-      line(this.rightSide,this.bottomSide,this.rightSide,this.topSide)
+      line(this.rightSide,this.bottomSide,this.rightSide,this.topSide)*/
 
       if(this.direction == 'W') { this.currentImage = this.imageLeft; }
-      if(this.direction == 'E') { this.currentImage = this.imageRight; }*/
+      if(this.direction == 'E') { this.currentImage = this.imageRight; }
 
       imageMode(CENTER)
 
