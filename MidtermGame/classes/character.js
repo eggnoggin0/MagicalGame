@@ -81,7 +81,7 @@ class Character {
 
   //movement
 
-  //move direction
+  //move direction, this has NSEW to track where to teleport
   moveLeft()  { this.teleportDirection = 'W'; this.direction = 'W'; this.xPos -= this.xSpeed; }
   moveRight() { this.teleportDirection = 'E'; this.direction = 'E'; this.xPos += this.xSpeed; }
   moveUp()    { this.teleportDirection = 'N'; this.yPos -= this.ySpeed; }
@@ -90,6 +90,7 @@ class Character {
   //change position
   movePosition() {
 
+    //move and check position
     if (this.yPos > height/3) {
       if (keyIsDown(87)) { this.moveUp(); }
     }
@@ -102,6 +103,7 @@ class Character {
 
     if (keyIsDown(68)) { this.moveRight(); }
 
+    //change position
     this.leftSide   = this.xPos - (this.sizeX / 2);
     this.rightSide  = this.xPos + (this.sizeX / 2);
     this.topSide    = this.yPos - (this.sizeY / 2);
@@ -111,13 +113,14 @@ class Character {
 
   //attacks
 
+  //projectile attacks
   createProjectiles() {
 
     //electricity
     if(this.magicMeter > 0.1) {
+      //shoot electricity
       if(keyIsDown(74)) {
         if (this.electricityEnvelopeFlag == 0) {
-          //this.electricityNoise.start();
           this.shootElectricitySound.play();
         }
         this.electricityEnvelopeFlag++;
@@ -134,6 +137,7 @@ class Character {
     //fire
     if(this.fireTime == 0) {
       if(this.magicMeter > 10) {
+        //shoot fire
         if(keyIsDown(75)) {
           if(keyIsPressed) { //stops sound when key is lifted
             this.explodeFireSound.play();
@@ -172,7 +176,7 @@ class Character {
 
   }
 
-
+  //check if time is stopped
   checkTime() {
 
     if(this.timeLimit > 0) {
@@ -194,6 +198,7 @@ class Character {
       if(this.teleportTime == 0) {
         if(keyIsDown(76)) {
           this.teleportSound.play();
+          //for teleporting north, make sure not teleporting over to background
           if( this.teleportDirection == 'N' ) {
             if( this.yPos - this.teleportLength > height / 3) {
               this.yPos -= this.teleportLength;
@@ -235,15 +240,15 @@ class Character {
     else {
       this.changeTimeMeter--;
     }
-
   }
 
+  //check if time is changed periods
   checkChangedTime() {
 
     if(this.futureTime > 0) {
       fill(255);
       textSize(50);
-      text(parseInt(this.futureTime / 100), width - 50,50);
+      text(parseInt(this.futureTime / 100), width - 100,50);
       this.futureTime--;
       if(this.futureTime == 1){ this.changeTimelinesSound.play(); }
     }
@@ -309,11 +314,15 @@ class Character {
 
     //check if alive
     if(this.isAlive) {
+
+      //hit box debugging code
+
       /*line(this.leftSide,this.topSide,this.rightSide,this.topSide)
       line(this.leftSide,this.bottomSide,this.rightSide,this.bottomSide)
       line(this.leftSide,this.bottomSide,this.leftSide,this.topSide)
       line(this.rightSide,this.bottomSide,this.rightSide,this.topSide)*/
 
+      //change image
       if(this.direction == 'W') { this.currentImage = this.imageLeft; }
       if(this.direction == 'E') { this.currentImage = this.imageRight; }
 

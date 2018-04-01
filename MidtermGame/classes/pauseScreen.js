@@ -30,7 +30,7 @@ class PauseScreen {
 
     }
 
-    //display pause screen
+    //display starting screen
     display() {
 
       //check if paused
@@ -49,6 +49,7 @@ class PauseScreen {
 
       }
 
+      //display pause screen
       else if(this.isPause == false) {
 
         this.isPause = false;

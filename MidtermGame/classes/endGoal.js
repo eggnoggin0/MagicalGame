@@ -39,6 +39,9 @@ class EndGoal {
     //display bananas
     if (this.isLastEnvironment) {
       image(this.bananaImage, this.xPos, this.yPos, this.bananaImage.width/8, this.bananaImage.height/8);
+
+      //hit box debugging code
+      
       /*line(this.leftSide,this.topSide,this.rightSide,this.topSide)
       line(this.leftSide,this.bottomSide,this.rightSide,this.bottomSide)
       line(this.leftSide,this.bottomSide,this.leftSide,this.topSide)

@@ -58,6 +58,7 @@ function setup() {
   //create Canvas
   createCanvas(1000,500);
 
+  //take out strokes for background
   noStroke();
 
   //Load Object
@@ -69,7 +70,7 @@ function setup() {
 }
 
 function draw() {
-
+  //start game from pause screen
   pauseScreen.display();
 
 }

@@ -50,6 +50,7 @@ class Soldier {
 
   }
 
+  //set what type of soldier this is
   setSoldier(x,y,version,isAlive) {
 
     this.isAlive = isAlive;
@@ -132,11 +133,13 @@ class Soldier {
 
   }
 
-
   //attacks
 
+  //fire dark magic
   fireProjectile() {
     //base number of projectiles based on type of monster
+
+    //simple monster
     if(this.version == 'Normal') {
 
       if( this.yPos > this.character.topSide  && this.yPos < this.character.bottomSide ) {
@@ -154,6 +157,7 @@ class Soldier {
       }
     }
 
+    //tougher monster
     if(this.version == 'Strong') {
 
       if( this.yPos > this.character.topSide  && this.yPos < this.character.bottomSide ) {
@@ -172,6 +176,7 @@ class Soldier {
       }
     }
 
+    //nightmare monster
     if(this.version == 'Dark') {
 
       if( this.character.xPos < this.xPos && this.direction == 'W' ) {
@@ -207,6 +212,7 @@ class Soldier {
     if(this.isAlive) {
 
       //hitbox
+
       /*line(this.leftSide,this.topSide,this.rightSide,this.topSide)
       line(this.leftSide,this.bottomSide,this.rightSide,this.bottomSide)
       line(this.leftSide,this.bottomSide,this.leftSide,this.topSide)
@@ -232,6 +238,7 @@ class Soldier {
     if(this.isAlive) {
 
       //hitbox
+      
       /*line(this.leftSide,this.topSide,this.rightSide,this.topSide)
       line(this.leftSide,this.bottomSide,this.rightSide,this.bottomSide)
       line(this.leftSide,this.bottomSide,this.leftSide,this.topSide)
