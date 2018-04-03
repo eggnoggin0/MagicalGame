@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Online Documentation</title>
+    </head>
+    <body>
+        <h1>Online Documentation</h1>
+        <p>Concept: <br>
+            Create a game that uses a “timeline” mechanic, which allows the player to freely switch between two gameplay states. These the state not occupied by the player at a given moment must remain static, allowing the user to return to the other state knowing that the location of the enemies there did not move. In the “dark” state of the game, a single invincible enemy encourages the player to switch back and forth between both states. In addition, certain magical abilities would be able to be used by the player including electricity, a fire explosion, the ability to pause time, and teleportation. The goal of the game is to reach a banana at the tenth stage of the game, with the number of enemies increasing at each stage.
+        </p>
+        <p>
+            Libraries: <br>
+            P5 only.
+        </p>
+        <p>
+            Classes: <br>
+            All as separate files, we have the following classes: character, darkProjectile, endGoal, environment, fire, magicItems, pauseScreen, projectiles, and soldier. All other classes are child classes of the pauseScreen class. This allowed us to keep the sketch file exceptionally clean. The only code in the draw function is pauseScreen.display();.
+        </p>
+        <p>
+            Assets: <br>
+            All images, except the banana are made from scratch. The sounds come from freesound.org. Various sounds were mixed and edited together. The environment is generated procedurally by the code.
+        </p>
+        <p>
+
+            Noteworthy processes: <br>
+            The enemies are a particle system, as are the dark projectiles, fire, and electricity. Perlin noise was used to generate the environment, which has a different seed every frame, meaning the background will be different every time the player reloads the page. The enemies are not moving with perlin noise, but can engage the player if the player is close enough. This causes the enemies to follow the character and attack. To trigger a sound using a “press and hold” effect for the electricity, P5 has envelope functionality. Since using an envelope would be somewhat difficult with an audio file, a flag algorithm was used. When the player presses “J”, a counter begins increasing with every frame, and when the player lets go, the counter returns to zero. The electricity plays only when the counter equals zero.
+        </p>
+        <img src="OnlineDocumentationImages/pauseScreen.png" alt="Pause Screen" width="1080">
+        <img src="OnlineDocumentationImages/lightState.png" alt="Light State" width="1080">
+        <img src="OnlineDocumentationImages/darkState.png" alt="Dark State" width="1080">
+        <img src="OnlineDocumentationImages/electricity.png" alt="Electricity Attack" width="1080">
+        <img src="OnlineDocumentationImages/fireBomb.png" alt="Fire Bomb Attack" width="1080">
+    </body>
+</html>
